@@ -1,0 +1,37 @@
+MeetSphere Payment Setup
+
+1. Start XAMPP MySQL.
+2. Import database/meetsphere.sql into phpMyAdmin.
+3. Backend:
+   cd backend\MeetSphere.Api
+   dotnet restore
+   dotnet run
+   API defaults to http://localhost:5000 (check launchSettings.json if your local profile uses another port).
+4. Frontend, in a second terminal:
+   cd frontend
+   npm install
+   npm start
+5. Open http://localhost:4200
+
+PAYMENT FLOW
+- User Dashboard -> create a meeting and set a fee.
+- User -> Discover meetings -> Pay & Join.
+- The checkout modal lets the user choose UPI, card, netbanking or wallet.
+- User -> My payments shows their records.
+- Admin -> Payments shows all users' records.
+- The existing MeetSphere layout, colors, navigation and meeting cards are retained.
+
+DEMO MODE VS REAL PAYMENTS
+- If Razorpay keys are blank, MeetSphere runs a DEMO/SIMULATED payment flow. It records a payment for local development but does NOT transfer money. Do not use demo mode in production.
+- To test the real gateway, create Razorpay TEST MODE keys and configure them in backend/MeetSphere.Api/appsettings.json under Razorpay:KeyId and Razorpay:KeySecret, or set environment variables Razorpay__KeyId and Razorpay__KeySecret.
+- Keep the KeySecret only on the API server. Never put it in Angular/frontend code or commit live secrets.
+- Use Razorpay test mode until order creation, checkout, signature verification, and payment history are tested end-to-end.
+
+TROUBLESHOOTING
+1. API won't start: open backend/MeetSphere.Api and run `dotnet restore`, then `dotnet run`; check the terminal for the actual port and build errors.
+2. Frontend cannot connect: confirm the API URL in frontend/src/app/services.ts matches the API URL/port. It currently points to http://localhost:5000/api.
+3. Database connection refused: start XAMPP MySQL and confirm the port, database name, username and password match the ConnectionStrings:DefaultConnection value in appsettings.json.
+4. Missing table: import database/meetsphere.sql into the configured meetsphere_db database.
+5. Razorpay popup unavailable: verify internet access and test keys; blank keys mean demo mode, not real payments.
+6. Payment is not listed: check the API response in the browser Network tab and confirm the meeting_payments table exists and the logged-in account is the same one used to pay.
+7. Do not manually mark real payments as Paid. In production, only server-verified Razorpay payments should be treated as paid.

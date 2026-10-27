@@ -1,0 +1,7 @@
+WORKSPACE 404 FIX
+
+The frontend calls /api/workspace/calendar. The backend WorkspaceController.cs exposes that exact route.
+If you see HTTP 404, you are almost certainly still running an older API process on port 5001.
+Use START_BACKEND.bat from this ZIP. It stops the old port-5001 process, deletes bin/obj, restores, and recompiles the current controller.
+Then verify http://localhost:5001/api/health returns status ok.
+Keep the backend window open before using Calendar/Notetaker/Contacts/Automations.

@@ -1,0 +1,22 @@
+MeetSphere workspace tools final API fix
+
+The frontend now uses /api instead of hard-coded localhost:5001/5000.
+Angular dev server proxies /api -> http://localhost:5000.
+
+RUN BACKEND:
+cd D:\MeetSphere-Complete-Website\MeetSphere\backend\MeetSphere.Api
+dotnet run
+
+RUN FRONTEND:
+cd D:\MeetSphere-Complete-Website\MeetSphere\frontend
+npm install
+npm start
+
+Then open http://localhost:4200
+
+This avoids the 5000/5001 mismatch. Workspace endpoints are:
+GET/POST /api/workspace/calendar
+GET/POST /api/workspace/notes
+GET/POST /api/workspace/contacts
+GET/POST /api/workspace/automations
+PUT/DELETE corresponding endpoints

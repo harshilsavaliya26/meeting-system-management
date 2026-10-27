@@ -1,0 +1,12 @@
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/out-tsc/
+frontend/coverage/
+backend/MeetSphere.Api/bin/
+backend/MeetSphere.Api/obj/
+backend/MeetSphere.Api/KeyRing/
+backend/MeetSphere.Api/appsettings.Development.json
+*.user
+*.suo
+*.log

@@ -1,0 +1,71 @@
+{
+ "$schema":"./node_modules/@angular/cli/lib/config/schema.json","version":1,"newProjectRoot":"projects",
+"projects": {
+  "meetsphere": {
+    "projectType": "application",
+    "root": "",
+    "sourceRoot": "src",
+    "architect": {
+      "build": {
+        "builder": "@angular-devkit/build-angular:application",
+        "options": {
+          "outputPath": "dist/meetsphere",
+          "index": "src/index.html",
+          "browser": "src/main.ts",
+          "polyfills": [
+            "zone.js"
+          ],
+          "tsConfig": "tsconfig.app.json",
+          "inlineStyleLanguage": "css",
+          "assets": [],
+          "styles": [
+            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+            "src/styles.css"
+          ],
+          "scripts": [
+            "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+          ]
+        },
+        "configurations": {
+          "production": {
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "8kb",
+                "maximumError": "16kb"
+              }
+            ],
+            "outputHashing": "all"
+          },
+          "development": {
+            "optimization": false,
+            "extractLicenses": false,
+            "sourceMap": true
+          }
+        },
+        "defaultConfiguration": "development"
+      },
+      "serve": {
+        "builder": "@angular-devkit/build-angular:dev-server",
+        "configurations": {
+          "production": {
+            "buildTarget": "meetsphere:build:production"
+          },
+          "development": {
+            "buildTarget": "meetsphere:build:development"
+          }
+        },
+        "defaultConfiguration": "development"
+      }
+    }
+  }
+},
+"cli": {
+  "analytics": "58b71b6d-505d-4085-a8cc-8fb289e6e740"
+}
+}

@@ -1,0 +1,2 @@
+Backend runs on http://localhost:5000. Frontend API URL is set to http://localhost:5000/api in frontend/src/app/services.ts.
+Notetaker, Contacts and Automations use /api/workspace/notes, /contacts and /automations and are saved to MySQL. Admin routes are /admin-tools/notes, /admin-tools/contacts and /admin-tools/automations.
